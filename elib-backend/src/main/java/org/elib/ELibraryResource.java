@@ -62,9 +62,9 @@ public class ELibraryResource {
         if(user != null) {
             UriBuilder uriBuilder = uriInfo.getAbsolutePathBuilder();
             uriBuilder.path(Integer.toString((Integer) user.getId()));
-            return Response.ok(uriBuilder.build()).entity(user).build();
+            return Response.created(uriBuilder.build()).entity(user).build();
         }
-        return Response.status(Response.Status.BAD_REQUEST).entity(new Error("WI-00", "Wrong input.")) .build();
+        return Response.status(Response.Status.BAD_REQUEST).entity(new Error("IN-NM", "User already exists.")) .build();
     }
 
     @GET

@@ -40,10 +40,16 @@ public class ELibServiceImpl implements ELibService {
 
     @Override
     public UserDto loginUser(UserDto userDto) {
-        User user = userRepository.findById((Integer) userDto.getId());
+        List<User> userList = userRepository.findAll();
         ModelMapper modelMapper = new ModelMapper();
-        userDto = modelMapper.map(user, UserDto.class);
-        return userDto;
+        User logUser = modelMapper.map(userDto, User.class);
+
+        for (User user:
+             userList) {
+            if(user.getName() == logUser.getName()) return modelMapper.map(user, UserDto.class);
+        }
+
+        return null;
     }
 
     @Override
